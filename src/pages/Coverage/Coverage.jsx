@@ -63,7 +63,7 @@ const Coverage = () => {
         />
         <button
           onClick={handleSearch}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+          className="px-4 py-2 bg-primary text-white rounded-lg"
         >
           Search
         </button>
