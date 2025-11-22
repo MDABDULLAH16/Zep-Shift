@@ -8,7 +8,10 @@ import axios from "axios";
 
 const Register = () => {
   const { createUser, updateUserInfo } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -50,7 +53,7 @@ const Register = () => {
                 .then((res) => {
                   if (res.data.insertedId) {
                     toast.success('Register Successful!!')
-                     
+                     navigate(from,{replace:true})
                  };
                 });
             })
