@@ -1,21 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import authImage from "../../../assets/AuthImage.png";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
+import useAuth from "../../../hooks/useAuth";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Register = () => {
-    const [image, setImage] = useState(null);
-    console.log(image);
-    
+  const { createUser, updateUserInfo } = useAuth();
 
-      const handleImageChange = (e) => {
-          const file = e.target.files[0];
-          console.log(file);
-          
-        if (file) {
-          setImage(URL.createObjectURL(file));
-        }
-      };
   const {
     register,
     handleSubmit,
@@ -23,7 +16,52 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const photo = data.photo[0];
+    createUser(data.email, data.password)
+      .then((result) => {
+        //image store first in image;
+        const formData = new FormData();
+        formData.append("image", photo);
+        //ibb url key
+        const imageHostKey = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_Image_Key
+        }`;
+        axios.post(`${imageHostKey}`, formData).then(async (res) => {
+          //make user info
+          const profileInfo = {
+            displayName: data.name,
+            photoURL: res.data?.data?.display_url,
+          };
+          await updateUserInfo(profileInfo)
+            .then((d) => {
+              console.log("profile update done", d);
+              const user = result.user;
+              console.log("user", user.displayName, user.photoURL);
+              const newUser = {
+                name: user?.displayName,
+                email: user?.email,
+                image: user?.photoURL,
+                role: "user",
+              };
+              console.log("nwe user", newUser);
+
+              axios
+                .post(`${import.meta.env.VITE_BACKEND_URL}/users`, newUser)
+                .then((res) => {
+                  if (res.data.insertedId) {
+                    toast.success('Register Successful!!')
+                     
+                 };
+                });
+            })
+            .catch((err) => console.log(err));
+        });
+
+        //apply db functionality;
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   return (
@@ -33,7 +71,7 @@ const Register = () => {
         <h1 className="text-2xl font-bold   ">Create an Account</h1>
         <p className="mb-2">Register with ZipShift</p>
         {/* Image Preview */}
-        {image && (
+        {/* {image && (
           <div className="flex ">
             <img
               src={image}
@@ -41,7 +79,7 @@ const Register = () => {
               className="w-24 h-24 object-cover rounded-full  border"
             />
           </div>
-        )}
+        )} */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* File Input */}
           <div className="form-control w-full">
@@ -51,7 +89,7 @@ const Register = () => {
             <input
               type="file"
               accept="image/*"
-              onChange={handleImageChange}
+              {...register("photo", { required: "Image is required!" })}
               className="file-input file-input-bordered w-full"
             />
           </div>
