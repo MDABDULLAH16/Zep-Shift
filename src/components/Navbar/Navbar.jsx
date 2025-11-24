@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router';
 import Logo from '../Logo/Logo';
+import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
+  const {user}= useAuth()
     const navLinks = (
       <>
         <li>
@@ -12,12 +14,24 @@ const Navbar = () => {
           <NavLink>Services</NavLink>
         </li>
         <li>
-          <NavLink to='/coverage'>Coverage</NavLink>
+          <NavLink to="/coverage">Coverage</NavLink>
         </li>
         <li>
           <NavLink>Contact</NavLink>
         </li>
-       
+        {user && (
+          <>
+            <li>
+              <NavLink to="/dashboard/sendParcel">Send Parcel</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/myParcels">My Parcels</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard">Dashboard</NavLink>
+            </li>
+          </>
+        )}
       </>
     );
     return (

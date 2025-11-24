@@ -5,6 +5,10 @@ import Coverage from "../pages/Coverage/Coverage";
 import AuthLayout from "../layout/AuthLayout/AuthLayout";
 import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
+import SendParcel from "../pages/SendParcel/SendParcel";
+import PrivateRoute from "./PrivateRouter";
+import DashboardLayout from "../layout/DashboradLayout/DashboardLayout";
+import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
 
 export const router = createBrowserRouter([
   {
@@ -17,8 +21,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "coverage",
-        loader: () => fetch("/serviceCenter.json"),
+        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
         Component: Coverage,
+      },
+      {
+        path: "sendParcel",
+        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
+        Component: SendParcel,
       },
     ],
   },
@@ -33,6 +42,25 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "myParcels",
+        Component: MyParcels,
+      },
+      {
+        path: "sendParcel",
+        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
+        Component: SendParcel,
       },
     ],
   },
