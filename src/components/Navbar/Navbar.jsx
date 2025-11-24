@@ -2,9 +2,11 @@ import React from 'react';
 import { Link, NavLink } from 'react-router';
 import Logo from '../Logo/Logo';
 import useAuth from '../../hooks/useAuth';
+import Loader from '../Loader/Loader';
+import NavSkeleton from '../Skeletons/NavSkeleton';
 
 const Navbar = () => {
-  const {user}= useAuth()
+  const {user,loading}= useAuth()
     const navLinks = (
       <>
         <li>
@@ -19,7 +21,7 @@ const Navbar = () => {
         <li>
           <NavLink>Contact</NavLink>
         </li>
-        {user && (
+        {loading?<NavSkeleton></NavSkeleton>:user && (
           <>
             <li>
               <NavLink to="/dashboard/sendParcel">Send Parcel</NavLink>
@@ -77,7 +79,8 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <Link to='/login' className="btn btn-primary text-black">Login</Link>
+            {loading? <Loader/> : user? <><img className='rounded-full h-12 w-12 object-cover' src={user.photoURL} alt="" srcset="" /></>:            <Link to='/login' className="btn btn-primary text-black">Login</Link>
+}
           </div>
         </div>
       </div>

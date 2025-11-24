@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from "react-router";
 import useAuth from "../hooks/useAuth";
+import Loader from "../components/Loader/Loader";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -7,7 +8,7 @@ const PrivateRoute = ({ children }) => {
 
   // Show loading screen
   if (loading) {
-    return <p className="text-center mt-10">Loading...</p>;
+    return <Loader/>
   }
 
   // If NOT logged in → redirect to login page

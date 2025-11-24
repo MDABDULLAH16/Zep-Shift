@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
+import GoogleSignIn from "../../../components/Buttons/GoogleSignIn";
 
 const Login = () => {
   const { loginUser } = useAuth();
@@ -81,7 +82,7 @@ const Login = () => {
             Forget Password?
           </p>
 
-          <button className="btn btn-success w-full mb-4">Login</button>
+          <button className="btn btn-primary text-black w-full mb-4">Login</button>
 
           <p className="text-center text-gray-500 mb-4">
             Don’t have any account?{" "}
@@ -92,16 +93,7 @@ const Login = () => {
 
           <div className="text-center text-gray-500 mb-2">Or</div>
 
-          <button type="button" className="btn btn-outline w-full">
-            <span className="mr-2">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                alt="Google"
-                className="w-5 inline"
-              />
-            </span>
-            Login with Google
-          </button>
+         <GoogleSignIn></GoogleSignIn>
         </form>
       </div>
 

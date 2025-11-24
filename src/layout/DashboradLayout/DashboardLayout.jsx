@@ -1,10 +1,30 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
-import { Home, Package, Truck, Settings, LogOut } from "lucide-react";
+import { Home, Package, Truck, Settings, LogOut, LucideHome, LayoutDashboard } from "lucide-react";
+import useAuth from "../../hooks/useAuth";
 
 const DashboardLayout = () => {
+  const { logOut } = useAuth();
+  const handleLogOut = () => {
+    logOut();
+  }
   const navLinks = (
     <>
+      <li>
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) =>
+            `flex items-center gap-3 
+                  is-drawer-close:tooltip is-drawer-close:tooltip-right
+                  ${isActive ? "bg-primary text-white" : ""}`
+          }
+          data-tip="Dashboard"
+        >
+          <LucideHome size={20} />
+          <span className="is-drawer-close:hidden">Home</span>
+        </NavLink>
+      </li>
       <li>
         <NavLink
           to="/dashboard"
@@ -16,7 +36,7 @@ const DashboardLayout = () => {
           }
           data-tip="Dashboard"
         >
-          <Home size={20} />
+          <LayoutDashboard size={20} />
           <span className="is-drawer-close:hidden">Dashboard</span>
         </NavLink>
       </li>
@@ -123,7 +143,7 @@ const DashboardLayout = () => {
 
             {/* Logout */}
             <li className="mt-auto">
-              <button
+              <button onClick={handleLogOut}
                 className="flex items-center gap-3 text-error 
                 is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Logout"

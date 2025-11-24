@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import authImage from "../../../assets/AuthImage.png";
-import { Link, Navigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import axios from "axios";
+import GoogleSignIn from "../../../components/Buttons/GoogleSignIn";
 
 const Register = () => {
   const { createUser, updateUserInfo } = useAuth();
@@ -153,7 +154,7 @@ const Register = () => {
         </p>
 
         <div className="divider">Or</div>
-        <button className="btn btn-outline w-full">Register with Google</button>
+       <GoogleSignIn/>
       </div>
 
       {/* Right Image Section */}
