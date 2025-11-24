@@ -9,6 +9,7 @@ import SendParcel from "../pages/SendParcel/SendParcel";
 import PrivateRoute from "./PrivateRouter";
 import DashboardLayout from "../layout/DashboradLayout/DashboardLayout";
 import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
         loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
         Component: SendParcel,
       },
+      {
+        path: 'payment/:parcelId',
+        Component:Payment
+      }
     ],
   },
 ]);
