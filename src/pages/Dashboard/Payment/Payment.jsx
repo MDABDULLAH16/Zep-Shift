@@ -21,16 +21,24 @@ const Payment = () => {
     return <Loader />;
   }
 
-  // Handle Stripe Payment
   const handlePayment = async () => {
-    try {
-      const res = await axiosSecure.post("/create-checkout-session", {
-        price: parcel.price, // dynamic parcel price
-      });
+    const paymentInfo = {
+      parcelId: parcel._id,
+      price: parcel.price,
+      email: parcel.senderEmail,
+      parcelName: parcel.parcelName,
+      weight: parcel.weight,
+      receiverName: parcel.receiverName,
+      address: parcel.deliveryAddress,
+    };
 
-      console.log(res.data);
-      
-      // Redirect to Stripe Checkout
+    try {
+      const res = await axiosSecure.post(
+        "/create-checkout-session",
+        paymentInfo
+      );
+
+      // Stripe checkout redirect
       window.location.href = res.data.url;
     } catch (error) {
       console.log(error);
