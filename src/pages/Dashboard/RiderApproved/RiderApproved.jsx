@@ -3,39 +3,69 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Trash, Trash2, UserRoundCheck, X } from "lucide-react";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const RiderApproved = () => {
   const axiosSecure = useAxiosSecure();
 
-  const {refetch, data: riders = [], isLoading } = useQuery({
+  const {
+    refetch,
+    data: riders = [],
+    isLoading,
+  } = useQuery({
     queryKey: ["riders", "pending"],
     queryFn: async () => {
       const res = await axiosSecure.get("/riders");
       return res.data;
     },
   });
-    const updateRider = (item, status) => {
-        console.log(item,status);
-        const updateInfo = { id: item._id, status, email: item.email }
-        console.log(updateInfo);
-        
-        axiosSecure.patch(`/riders/${item._id}`, updateInfo).then((res) => {
-          console.log(res.data);
-          if (res.data.modifiedCount) {
+  const updateRider = (item, status) => {
+    console.log(item, status);
+    const updateInfo = { id: item._id, status, email: item.email };
+    console.log(updateInfo);
+
+    axiosSecure.patch(`/riders/${item._id}`, updateInfo).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount) {
+        refetch();
+        toast.success(`Rider Apply has been ${status}`);
+      }
+    });
+  };
+  const handleApproved = (item) => {
+    const status = "approved";
+    updateRider(item, status);
+  };
+  const handleReject = (item) => {
+    const status = "reject";
+    updateRider(item, status);
+  };
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+          console.log(id);
+          
+        axiosSecure.delete(`/riders/${id}`).then((res) => {
+          if (res.data.deletedCount) {
             refetch();
-            toast.success(`Rider Apply has been ${status}`);
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
           }
         });
-    }
-    const handleApproved = (item) => {
-        const status = 'approved'
-        updateRider(item,status)
-    }
-    const handleReject = (item) => {
-        const status = 'reject';
-        updateRider(item,status)
-
-    }
+      }
+    });
+  };
 
   return (
     <div className="max-w-6xl mx-auto p-6 md:px-10">
@@ -120,19 +150,22 @@ const RiderApproved = () => {
 
                     {/* ACTION */}
                     <td className="p-3">
-                      <button onClick={()=>handleApproved(item)}
+                      <button
+                        onClick={() => handleApproved(item)}
                         data-tip="Approved"
                         className="tooltip px-3 py-1 bg-blue-100 text-blue-700 hover:text-green-500 rounded"
                       >
                         <UserRoundCheck></UserRoundCheck>
                       </button>
-                      <button onClick={()=>handleReject(item)}
+                      <button
+                        onClick={() => handleReject(item)}
                         data-tip="Reject"
                         className="tooltip px-3 py-1 bg-blue-100 text-blue-700 hover:text-red-500 rounded"
                       >
                         <X></X>
                       </button>
-                      <button
+                            <button
+                                onClick={()=>handleDelete(_id)}
                         data-tip="Delete Apply"
                         className="tooltip px-3 py-1 bg-blue-100 text-blue-700 hover:text-red-500 rounded"
                       >
