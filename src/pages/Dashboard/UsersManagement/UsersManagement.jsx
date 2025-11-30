@@ -27,7 +27,7 @@ const UsersManagement = () => {
         if (result.isConfirmed) {
           console.log(user._id);
           
-        axiosSecure.patch(`/users/${user._id}`, roleInfo).then((res) => {
+        axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
             if (res.data.modifiedCount) {
               refetch()
               Swal.fire({
@@ -54,7 +54,7 @@ const UsersManagement = () => {
         if (result.isConfirmed) {
           console.log(user._id);
           
-        axiosSecure.patch(`/users/${user._id}`, roleInfo).then((res) => {
+        axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
             if (res.data.modifiedCount) {
               refetch()
               Swal.fire({

@@ -2,9 +2,13 @@ import React from "react";
 import { NavLink, Outlet } from "react-router";
 import { Home, Package, Truck, Settings, LogOut, LucideHome, LayoutDashboard, CreditCard, Bike, Users2 } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/useRole";
 
 const DashboardLayout = () => {
   const { logOut } = useAuth();
+  const { role } = useRole()
+    console.log(role);
+    
   const handleLogOut = () => {
     logOut();
   }
@@ -73,36 +77,41 @@ const DashboardLayout = () => {
         </NavLink>
       </li>
 
-      {/* rider apply */}
-      <li>
-        <NavLink
-          to="/dashboard/rider-apply"
-          className={({ isActive }) =>
-            `flex items-center gap-3 
+      {role?.role === "admin" && (
+        <>
+           
+          {/* rider apply */}
+          <li>
+            <NavLink
+              to="/dashboard/rider-apply"
+              className={({ isActive }) =>
+                `flex items-center gap-3 
                   is-drawer-close:tooltip is-drawer-close:tooltip-right
                   ${isActive ? "bg-primary text-black" : ""}`
-          }
-          data-tip="Rider Apply"
-        >
-          <Bike size={20} />
-          <span className="is-drawer-close:hidden">Rider Apply</span>
-        </NavLink>
-      </li>
-      {/* users management */}
-      <li>
-        <NavLink
-          to="/dashboard/users-management"
-          className={({ isActive }) =>
-            `flex items-center gap-3 
+              }
+              data-tip="Rider Apply"
+            >
+              <Bike size={20} />
+              <span className="is-drawer-close:hidden">Rider Apply</span>
+            </NavLink>
+          </li>
+          {/* users management */}
+          <li>
+            <NavLink
+              to="/dashboard/users-management"
+              className={({ isActive }) =>
+                `flex items-center gap-3 
                   is-drawer-close:tooltip is-drawer-close:tooltip-right
                   ${isActive ? "bg-primary text-black" : ""}`
-          }
-          data-tip="Users Management"
-        >
-          <Users2 size={20} />
-          <span className="is-drawer-close:hidden">Users Management</span>
-        </NavLink>
-      </li>
+              }
+              data-tip="Users Management"
+            >
+              <Users2 size={20} />
+              <span className="is-drawer-close:hidden">Users Management</span>
+            </NavLink>
+          </li>
+        </>
+      )}
       {/* payment history */}
       <li>
         <NavLink
