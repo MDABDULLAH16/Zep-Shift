@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import useAxios from "./../../../hooks/useAxiosSecure";
-import useAuth from "./../../../hooks/useAuth";
+ import useAuth from "./../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../components/Loader/Loader";
 import { Edit, Eye, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyParcels = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxios();
+  const axiosSecure = useAxiosSecure();
 
   const { data: parcels = [], isLoading,refetch } = useQuery({
     queryKey: ["/parcels", user?.email],

@@ -45,7 +45,7 @@ const Register = () => {
                 name: user?.displayName,
                 email: user?.email,
                 image: user?.photoURL,
-                role: "user",
+                 
               };
               console.log("nwe user", newUser);
 

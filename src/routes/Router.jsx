@@ -12,8 +12,12 @@ import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancel from "../pages/Dashboard/Payment/PaymentCancelled";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
+import BeRider from "../pages/Rider/BeRider/BeRider";
+import RiderApproved from "../pages/Dashboard/RiderApproved/RiderApproved";
 
 export const router = createBrowserRouter([
+  //root layout;
   {
     path: "/",
     Component: RootLayout,
@@ -32,8 +36,14 @@ export const router = createBrowserRouter([
         loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
         Component: SendParcel,
       },
+      {
+        path: "rider",
+        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
+        Component: BeRider,
+      },
     ],
   },
+  //auth layout;
   {
     path: "/",
     Component: AuthLayout,
@@ -48,6 +58,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  //dashboard layout
   {
     path: "dashboard",
     element: (
@@ -66,17 +77,25 @@ export const router = createBrowserRouter([
         Component: SendParcel,
       },
       {
-        path: 'payment/:parcelId',
-        Component:Payment
+        path: "payment/:parcelId",
+        Component: Payment,
       },
       {
-        path: 'paymentSuccess',
-        Component:PaymentSuccess
+        path: "paymentSuccess",
+        Component: PaymentSuccess,
       },
       {
-        path: 'paymentCancelled',
-        Component:PaymentCancel
-      }
+        path: "paymentCancelled",
+        Component: PaymentCancel,
+      },
+      {
+        path: "rider-apply",
+        Component: RiderApproved,
+      },
+      {
+        path: "payment-history",
+        Component: PaymentHistory,
+      },
     ],
   },
 ]);

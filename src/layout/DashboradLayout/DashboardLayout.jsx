@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
-import { Home, Package, Truck, Settings, LogOut, LucideHome, LayoutDashboard } from "lucide-react";
+import { Home, Package, Truck, Settings, LogOut, LucideHome, LayoutDashboard, CreditCard, Bike } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 
 const DashboardLayout = () => {
@@ -17,7 +17,7 @@ const DashboardLayout = () => {
           className={({ isActive }) =>
             `flex items-center gap-3 
                   is-drawer-close:tooltip is-drawer-close:tooltip-right
-                  ${isActive ? "bg-primary text-white" : ""}`
+                  ${isActive ? "bg-primary text-black" : ""}`
           }
           data-tip="Dashboard"
         >
@@ -32,7 +32,7 @@ const DashboardLayout = () => {
           className={({ isActive }) =>
             `flex items-center gap-3 
                   is-drawer-close:tooltip is-drawer-close:tooltip-right
-                  ${isActive ? "bg-primary text-white" : ""}`
+                  ${isActive ? "bg-primary text-black" : ""}`
           }
           data-tip="Dashboard"
         >
@@ -48,7 +48,7 @@ const DashboardLayout = () => {
           className={({ isActive }) =>
             `flex items-center gap-3 
                   is-drawer-close:tooltip is-drawer-close:tooltip-right
-                  ${isActive ? "bg-primary text-white" : ""}`
+                  ${isActive ? "bg-primary text-black" : ""}`
           }
           data-tip="Send Parcel"
         >
@@ -64,7 +64,7 @@ const DashboardLayout = () => {
           className={({ isActive }) =>
             `flex items-center gap-3 
                   is-drawer-close:tooltip is-drawer-close:tooltip-right
-                  ${isActive ? "bg-primary text-white" : ""}`
+                  ${isActive ? "bg-primary text-black" : ""}`
           }
           data-tip="My Parcels"
         >
@@ -73,25 +73,40 @@ const DashboardLayout = () => {
         </NavLink>
       </li>
 
-      {/* Settings */}
+      {/* rider apply */}
       <li>
         <NavLink
-          to="/dashboard/settings"
+          to="/dashboard/rider-apply"
           className={({ isActive }) =>
             `flex items-center gap-3 
                   is-drawer-close:tooltip is-drawer-close:tooltip-right
-                  ${isActive ? "bg-primary text-white" : ""}`
+                  ${isActive ? "bg-primary text-black" : ""}`
           }
-          data-tip="Settings"
+          data-tip="Rider Apply"
         >
-          <Settings size={20} />
-          <span className="is-drawer-close:hidden">Settings</span>
+          <Bike size={20} />
+          <span className="is-drawer-close:hidden">Rider Apply</span>
+        </NavLink>
+      </li>
+      {/* payment history */}
+      <li>
+        <NavLink
+          to="/dashboard/payment-history"
+          className={({ isActive }) =>
+            `flex items-center gap-3 
+                  is-drawer-close:tooltip is-drawer-close:tooltip-right
+                  ${isActive ? "bg-primary text-black" : ""}`
+          }
+          data-tip="Payment History"
+        >
+          <CreditCard size={20} />
+          <span className="is-drawer-close:hidden">Payment History</span>
         </NavLink>
       </li>
     </>
   );
   return (
-    <div className="drawer lg:drawer-open h-screen">
+    <div className="drawer lg:drawer-open min-h-screen">
       {/* Drawer controller */}
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
@@ -119,11 +134,11 @@ const DashboardLayout = () => {
               <path d="M4 18h16" />
             </svg>
           </label>
-          <h1 className="text-xl font-semibold">Parcel Dashboard</h1>
+          <h1 className="text-xl font-semibold">Zep-Shift Dashboard</h1>
         </nav>
 
         {/* Page Content */}
-        <div className="p-4">
+        <div className="">
           <Outlet />
         </div>
       </div>

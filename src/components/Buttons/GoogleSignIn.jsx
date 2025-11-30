@@ -23,7 +23,7 @@ const GoogleSignIn = () => {
           name: user?.displayName,
           email: user?.email,
           image: user?.photoURL,
-          role: "user",
+         
         };
 
         axios

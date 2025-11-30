@@ -10,16 +10,16 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink to='/'>Home</NavLink>
       </li>
       <li>
-        <NavLink>Services</NavLink>
+        <NavLink to='/services'>Services</NavLink>
       </li>
       <li>
         <NavLink to="/coverage">Coverage</NavLink>
       </li>
       <li>
-        <NavLink>Contact</NavLink>
+        <NavLink  to='/contact'>Contact</NavLink>
       </li>
       {loading ? (
         <NavSkeleton></NavSkeleton>
@@ -31,6 +31,9 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink to="/dashboard/myParcels">My Parcels</NavLink>
+            </li>
+            <li>
+              <NavLink to="/rider">Be A Rider</NavLink>
             </li>
             <li>
               <NavLink to="/dashboard">Dashboard</NavLink>

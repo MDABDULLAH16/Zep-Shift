@@ -1,12 +1,11 @@
-import React from "react";
-import useAxios from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import Loader from "../../../components/Loader/Loader";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Payment = () => {
   const { parcelId } = useParams();
-  const axiosSecure = useAxios();
+  const axiosSecure = useAxiosSecure();
 
   // Load parcel details
   const { data: parcel, isLoading } = useQuery({
