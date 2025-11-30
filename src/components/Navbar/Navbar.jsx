@@ -86,8 +86,9 @@ const Navbar = () => {
               <img
                 className="rounded-full h-12 w-12 object-cover"
                 src={user.photoURL}
-                alt=""
-                srcset=""
+                alt="profile"
+                   title={user.displayName}
+                  referrerPolicy="no-referrer"
               />
             </>
           ) : (

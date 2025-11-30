@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
-import { Home, Package, Truck, Settings, LogOut, LucideHome, LayoutDashboard, CreditCard, Bike } from "lucide-react";
+import { Home, Package, Truck, Settings, LogOut, LucideHome, LayoutDashboard, CreditCard, Bike, Users2 } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 
 const DashboardLayout = () => {
@@ -86,6 +86,21 @@ const DashboardLayout = () => {
         >
           <Bike size={20} />
           <span className="is-drawer-close:hidden">Rider Apply</span>
+        </NavLink>
+      </li>
+      {/* users management */}
+      <li>
+        <NavLink
+          to="/dashboard/users-management"
+          className={({ isActive }) =>
+            `flex items-center gap-3 
+                  is-drawer-close:tooltip is-drawer-close:tooltip-right
+                  ${isActive ? "bg-primary text-black" : ""}`
+          }
+          data-tip="Users Management"
+        >
+          <Users2 size={20} />
+          <span className="is-drawer-close:hidden">Users Management</span>
         </NavLink>
       </li>
       {/* payment history */}
