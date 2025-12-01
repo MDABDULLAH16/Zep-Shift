@@ -28,7 +28,7 @@ const PaymentHistory = () => {
               <th className="p-3 text-left">SL</th>
               <th className="p-3 text-left">Amount</th>
               <th className="p-3 text-left">Currency</th>
-              <th className="p-3 text-left">Parcel ID</th>
+              <th className="p-3 text-left">Transaction ID</th>
               <th className="p-3 text-left">Status</th>
               <th className="p-3 text-left">Paid At</th>
               <th className="p-3 text-left">Action</th>
@@ -41,7 +41,7 @@ const PaymentHistory = () => {
                 <td className="p-3">{index+1}</td>
                 <td className="p-3">৳ {item.amount}</td>
                 <td className="p-3">{item.currency}</td>
-                <td className="p-3">{item.parcelId}</td>
+                <td className="p-3">{item.transactionId}</td>
                 <td className="p-3 text-green-600 font-semibold">
                   {item.paymentStatus}
                 </td>

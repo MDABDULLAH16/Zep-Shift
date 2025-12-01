@@ -50,15 +50,16 @@ const MyParcels = () => {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">My Parcels</h1>
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
+        <table className="table table-zebra w-full text-center">
           <thead>
             <tr>
-              <th>Parcel Name</th>
-              <th>Weight (kg)</th>
+              <th>Name</th>
+              <th>Weight(kg)</th>
               <th>Type</th>
-              <th>Price (৳)</th>
-              <th>Payment Status</th>
-              <th>Sender</th>
+              <th>Tk</th>
+              <th>Payment</th>
+              <th>Tracking</th>
+              <th>Delivery Status</th>
               <th>Receiver</th>
               <th>Actions</th>
             </tr>
@@ -70,13 +71,23 @@ const MyParcels = () => {
                 <td>{parcel.parcelWeight}</td>
                 <td>{parcel.parcelType}</td>
                 <td>{parcel.price}</td>
-                <td> { parcel.paymentStatus==='paid'?<p className="text-green-400">Paid</p>:<Link to={`/dashboard/payment/${parcel._id}`} className="btn btn-sm btn-primary text-black">Pay</Link>}</td>
                 <td>
-                  {parcel.senderName}
-                  <br />
-                  <span className="text-sm text-gray-500">
-                    {parcel.senderEmail}
-                  </span>
+                  {" "}
+                  {parcel.paymentStatus === "paid" ? (
+                    <p className="text-green-400">Paid</p>
+                  ) : (
+                    <Link
+                      to={`/dashboard/payment/${parcel._id}`}
+                      className="btn btn-sm btn-primary text-black"
+                    >
+                      Pay
+                    </Link>
+                  )}
+                </td>
+                <td>{parcel.trackingId}</td>
+                <td>
+                 
+                   {parcel.deliveryStatus}
                 </td>
                 <td>
                   {parcel.receiverName}
@@ -92,7 +103,10 @@ const MyParcels = () => {
                   <button className="btn btn-sm btn-warning flex items-center gap-1">
                     <Edit size={16} /> Edit
                   </button>
-                  <button onClick={()=>handleParcelDelete(parcel._id)} className="btn btn-sm btn-error flex items-center gap-1">
+                  <button
+                    onClick={() => handleParcelDelete(parcel._id)}
+                    className="btn btn-sm btn-error flex items-center gap-1"
+                  >
                     <Trash2 size={16} /> Delete
                   </button>
                 </td>

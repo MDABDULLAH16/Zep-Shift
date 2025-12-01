@@ -8,7 +8,7 @@ import axios from "axios";
 import GoogleSignIn from "../../../components/Buttons/GoogleSignIn";
 
 const Register = () => {
-  const { createUser, updateUserInfo } = useAuth();
+  const { createUser, updateUserInfo,setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -54,7 +54,8 @@ const Register = () => {
                 .then((res) => {
                   if (res.data.insertedId) {
                     toast.success('Register Successful!!')
-                     navigate(from,{replace:true})
+                    navigate(from,{replace:true})
+                    setLoading(false)
                  };
                 });
             })

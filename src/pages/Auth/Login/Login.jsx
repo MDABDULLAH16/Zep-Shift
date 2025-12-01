@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import GoogleSignIn from "../../../components/Buttons/GoogleSignIn";
 
 const Login = () => {
-  const { loginUser } = useAuth();
+  const { loginUser,setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,6 +26,7 @@ const Login = () => {
       .then(() => {
         toast.success("Login Successful!");
         navigate(from, { replace: true });
+        setLoading(false)
       })
       .catch((err) => {
         toast.error(err.message);

@@ -1,17 +1,29 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
-import { Home, Package, Truck, Settings, LogOut, LucideHome, LayoutDashboard, CreditCard, Bike, Users2 } from "lucide-react";
+import {
+  Home,
+  Package,
+  Truck,
+  Settings,
+  LogOut,
+  LucideHome,
+  LayoutDashboard,
+  CreditCard,
+  Bike,
+  Users2,
+  UserRoundPlus,
+} from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import useRole from "../../hooks/useRole";
 
 const DashboardLayout = () => {
   const { logOut } = useAuth();
-  const { role } = useRole()
-    console.log(role);
-    
+  const { role } = useRole();
+  console.log(role);
+
   const handleLogOut = () => {
     logOut();
-  }
+  };
   const navLinks = (
     <>
       <li>
@@ -79,8 +91,21 @@ const DashboardLayout = () => {
 
       {role?.role === "admin" && (
         <>
-           
           {/* rider apply */}
+          <li>
+            <NavLink
+              to="/dashboard/assign-riders"
+              className={({ isActive }) =>
+                `flex items-center gap-3 
+                  is-drawer-close:tooltip is-drawer-close:tooltip-right
+                  ${isActive ? "bg-primary text-black" : ""}`
+              }
+              data-tip="Assign Riders"
+            >
+              <UserRoundPlus size={20} />
+              <span className="is-drawer-close:hidden">Assign Riders</span>
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="/dashboard/rider-apply"
@@ -178,11 +203,12 @@ const DashboardLayout = () => {
           {/* Sidebar Menu */}
           <ul className="menu w-full grow p-2">
             {/* Dashboard */}
-          {navLinks}
+            {navLinks}
 
             {/* Logout */}
-            <li className="mt-auto">
-              <button onClick={handleLogOut}
+            <li className=" ">
+              <button
+                onClick={handleLogOut}
                 className="flex items-center gap-3 text-error 
                 is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Logout"

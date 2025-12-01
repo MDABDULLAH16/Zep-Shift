@@ -17,6 +17,7 @@ import BeRider from "../pages/Rider/BeRider/BeRider";
 import RiderApproved from "../pages/Dashboard/RiderApproved/RiderApproved";
 import UsersManagement from "../pages/Dashboard/UsersManagement/UsersManagement";
 import AdminRoute from "./AdminRoute";
+import AssignRiders from "../pages/Dashboard/AssignRiders/AssignRiders";
 
 export const router = createBrowserRouter([
   //root layout;
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
       {
         path: "rider-apply",
         Component: RiderApproved,
+      },
+      {
+        path: "assign-riders",
+        element:<AdminRoute><AssignRiders/></AdminRoute>
       },
       {
         path: "payment-history",

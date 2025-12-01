@@ -82,7 +82,7 @@ const Navbar = () => {
           {loading ? (
             <Loader />
           ) : user ? (
-            <>
+            <Link to='/dashboard'>
               <img
                 className="rounded-full h-12 w-12 object-cover"
                 src={user.photoURL}
@@ -90,7 +90,7 @@ const Navbar = () => {
                    title={user.displayName}
                   referrerPolicy="no-referrer"
               />
-            </>
+            </Link>
           ) : (
             <Link to="/login" className="btn btn-primary text-black">
               Login
