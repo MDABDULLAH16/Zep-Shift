@@ -114,7 +114,7 @@ const UsersManagement = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img src={user.image} alt="profile" />
+                        <img src={user.image} alt="profile" referrerPolicy="no-referrer" />
                       </div>
                     </div>
                     <div>

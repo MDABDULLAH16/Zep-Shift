@@ -5,12 +5,12 @@ import Loader from "../components/Loader/Loader";
 import Forbidden from "../components/Forbidden/Forbidden";
 
 const AdminRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const { role, roleLoading } = useRole();
   if (loading || roleLoading) {
     return <Loader></Loader>;
   }
-  if (role.role !== "admin") {
+  if (role !== "admin") {
     return <Forbidden></Forbidden>;
   }
   return children;

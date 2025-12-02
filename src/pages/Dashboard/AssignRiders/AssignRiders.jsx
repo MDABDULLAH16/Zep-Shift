@@ -43,8 +43,10 @@ const AssignRiders = () => {
     axiosSecure
       .patch(`/parcels/${selectedParcel._id}`, riderInfo)
       .then((res) => {
-        if (res.data.modifiedCount) {
-          toast.success("Rider Assign Success!!");
+          if (res.data.modifiedCount) {
+            refAssignModal.current.close()
+              toast.success("Rider Assign Success!!");
+              
         }
       });
   };

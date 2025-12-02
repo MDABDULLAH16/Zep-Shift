@@ -16,18 +16,18 @@ export default function BeRider() {
 
   const { register, handleSubmit, watch } = useForm();
   const senderRegion = watch("region");
-  const senderDistrict = watch("district");
-  ("senderRegion");
+  // const senderDistrict = watch("district");
+  // ("senderRegion");
 
   const getDistrictsByRegion = (region) => {
     const filtered = serviceCenter.filter((c) => c.region === region);
     return [...new Set(filtered.map((d) => d.district))];
   };
 
-  const getWarehousesByDistrict = (district) => {
-    const selected = serviceCenter.find((c) => c.district === district);
-    return selected?.covered_area || [];
-  };
+  // const getWarehousesByDistrict = (district) => {
+  //   const selected = serviceCenter.find((c) => c.district === district);
+  //   return selected?.covered_area || [];
+  // };
 
   const onSubmit = (data) => {
  
@@ -112,7 +112,7 @@ export default function BeRider() {
             ))}
           </select>
 
-          {/* Warehouse */}
+          {/* Warehouse
           <select
             {...register("warehouse", { required: true })}
             className="select select-bordered w-full"
@@ -123,7 +123,7 @@ export default function BeRider() {
                 {w}
               </option>
             ))}
-          </select>
+          </select> */}
 
           {/* NID & Contact */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

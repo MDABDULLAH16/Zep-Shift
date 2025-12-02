@@ -12,6 +12,7 @@ import {
   Bike,
   Users2,
   UserRoundPlus,
+  PackageCheck,
 } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import useRole from "../../hooks/useRole";
@@ -88,8 +89,31 @@ const DashboardLayout = () => {
           <span className="is-drawer-close:hidden">My Parcels</span>
         </NavLink>
       </li>
+      {/* links for only rider  */}
+      {role === "rider" && (
+        <>
+          {" "}
+          <li>
+            <NavLink
+              to="/dashboard/assigned-deliveries"
+              className={({ isActive }) =>
+                `flex items-center gap-3 
+                  is-drawer-close:tooltip is-drawer-close:tooltip-right
+                  ${isActive ? "bg-primary text-black" : ""}`
+              }
+              data-tip="Assigned Deliveries"
+            >
+              <PackageCheck size={20} />
+              <span className="is-drawer-close:hidden">
+                Assigned Deliveries
+              </span>
+            </NavLink>
+          </li>
+        </>
+      )}
 
-      {role?.role === "admin" && (
+      {/* links for only admin  */}
+      {role === "admin" && (
         <>
           {/* rider apply */}
           <li>
@@ -206,7 +230,7 @@ const DashboardLayout = () => {
             {navLinks}
 
             {/* Logout */}
-            <li className=" ">
+            <li className="">
               <button
                 onClick={handleLogOut}
                 className="flex items-center gap-3 text-error 

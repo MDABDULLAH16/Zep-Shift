@@ -18,6 +18,8 @@ import RiderApproved from "../pages/Dashboard/RiderApproved/RiderApproved";
 import UsersManagement from "../pages/Dashboard/UsersManagement/UsersManagement";
 import AdminRoute from "./AdminRoute";
 import AssignRiders from "../pages/Dashboard/AssignRiders/AssignRiders";
+import RiderRoute from "./RiderRoute";
+import AssignedDeliveries from "../pages/Dashboard/AssignedDeliveries/AssignedDeliveries";
 
 export const router = createBrowserRouter([
   //root layout;
@@ -75,6 +77,10 @@ export const router = createBrowserRouter([
         Component: MyParcels,
       },
       {
+        path: "payment-history",
+        Component: PaymentHistory,
+      },
+      {
         path: "sendParcel",
         loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
         Component: SendParcel,
@@ -93,16 +99,21 @@ export const router = createBrowserRouter([
       },
       {
         path: "rider-apply",
-        Component: RiderApproved,
+        element: (
+          <AdminRoute>
+            <RiderApproved />
+          </AdminRoute>
+        ),
       },
       {
         path: "assign-riders",
-        element:<AdminRoute><AssignRiders/></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AssignRiders />
+          </AdminRoute>
+        ),
       },
-      {
-        path: "payment-history",
-        Component: PaymentHistory,
-      },
+
       {
         path: "users-management",
         element: (
@@ -110,6 +121,11 @@ export const router = createBrowserRouter([
             <UsersManagement />
           </AdminRoute>
         ),
+      },
+      //rider routes
+      {
+        path: "assigned-deliveries",
+        element: <AssignedDeliveries />,
       },
     ],
   },
